@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: neurosphere-site
+    env: python
+    region: frankfurt
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+    buildCommand: |
+      cd SITE
+      pip install -r requirements.txt
+    startCommand: |
+      cd SITE
+      gunicorn neurosphere.wsgi
